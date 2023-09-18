@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 .card .front {
   transform: rotateY(90deg);
   transition: all ease-in 0.2s;
