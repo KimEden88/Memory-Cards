@@ -48,6 +48,8 @@ function App() {
       .sort(() => Math.random() - 0.5)
       .map((card) => ({ ...card, cardId: Math.random(), matched: false }));
     setCards(shuffledCards);
+    setChoiceOne(null);
+    setChoiceTwo(null);
     setTurns(0);
     console.log('cards:', shuffledCards);
   };
@@ -91,6 +93,10 @@ function App() {
   }, [choiceOne, choiceTwo, cardsAmount]);
 
   console.log(cards);
+
+  useEffect(() => {
+    ShuffleCards();
+  }, []);
 
   return (
     <div className="max-w-4xl max-h-screen mx-auto my-10 text-center">
