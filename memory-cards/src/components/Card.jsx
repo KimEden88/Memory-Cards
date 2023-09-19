@@ -21,7 +21,7 @@ const Card = ({ card, handleChoice, flipped, wrongChoiceDelay }) => {
           className={`back w-[100%] block rounded-md bg-gray-800 border-2 border-slate-200 ${
             wrongChoiceDelay ? 'cursor-not-allowed' : 'cursor-pointer'
           }`}
-          src="../src/assets/cover.png"
+          src="../public/cover.png"
           alt="card back"
         />
       </div>
