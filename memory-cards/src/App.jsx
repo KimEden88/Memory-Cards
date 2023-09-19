@@ -3,7 +3,7 @@ import ButtonStart from './components/ButtonStart';
 import instance from './axios/instance';
 import { useEffect, useState } from 'react';
 import Card from './components/Card';
-import cover from './public/cover.png';
+import cover from './public/images/cover.png';
 
 function App() {
   const [character, setCharacters] = useState([]);
