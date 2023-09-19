@@ -3,6 +3,7 @@ import ButtonStart from './components/ButtonStart';
 import instance from './axios/instance';
 import { useEffect, useState } from 'react';
 import Card from './components/Card';
+import cover from './public/cover.png';
 
 function App() {
   const [character, setCharacters] = useState([]);
@@ -108,6 +109,7 @@ function App() {
             <Card
               key={card.cardId}
               card={card}
+              cover={cover}
               handleChoice={handleChoice}
               wrongChoiceDelay={wrongChoiceDelay}
               flipped={card === choiceOne || card === choiceTwo || card.matched}
