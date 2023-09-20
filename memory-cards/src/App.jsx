@@ -4,6 +4,8 @@ import instance from './axios/instance';
 import { useEffect, useState } from 'react';
 import Card from './components/Card';
 import cover from './public/images/cover.png';
+import dance from './public/images/dance.gif';
+import congrats from './components/endText';
 
 function App() {
   const [character, setCharacters] = useState([]);
@@ -13,6 +15,7 @@ function App() {
   const [choiceTwo, setChoiceTwo] = useState(null);
   const [wrongChoiceDelay, setWrongChoiceDelay] = useState(false);
   const [cardsAmount, setCardsAmount] = useState(8);
+  const [endGame, setEndGame] = useState(0);
 
   const handleAddition = () => {
     setCardsAmount((pre) => {
@@ -42,6 +45,8 @@ function App() {
       console.log(error.response);
     }
   };
+  //get gif
+
   //Shuffle cards
   const ShuffleCards = () => {
     getCharacters();
@@ -52,6 +57,7 @@ function App() {
     setChoiceOne(null);
     setChoiceTwo(null);
     setTurns(0);
+    setEndGame(0);
     console.log('cards:', shuffledCards);
   };
   //Handle choices
@@ -81,8 +87,11 @@ function App() {
             }
           });
         });
-
         handleTurn();
+        setTimeout(() => {
+          setEndGame((prev) => prev + 1);
+          console.log('endGame:', endGame);
+        }, 1500);
       } else {
         setWrongChoiceDelay(true);
         setTimeout(() => {
@@ -103,19 +112,35 @@ function App() {
     <div className="max-w-4xl max-h-screen mx-auto my-10 text-center">
       <h1 className="text-4xl text-teal-50 py-4 font-semibold">Memory cards</h1>
       <h3 className="text-2xl text-teal-50 py-2 font-semibold">{`Steps: ${turns}`}</h3>
-      <div className="my-5 grid grid-cols-4 gap-4">
-        {cards &&
-          cards.map((card) => (
-            <Card
-              key={card.cardId}
-              card={card}
-              cover={cover}
-              handleChoice={handleChoice}
-              wrongChoiceDelay={wrongChoiceDelay}
-              flipped={card === choiceOne || card === choiceTwo || card.matched}
-            />
-          ))}
-      </div>
+      {endGame === cardsAmount ? (
+        <div>
+          <h1 className="text-white text-2xl py-3">
+            {`${congrats[Math.floor(11 * Math.random())]}`}
+          </h1>
+          <img
+            src={dance}
+            alt="rick Dance"
+            className="m-auto bg-white rounded-sm"
+          />
+        </div>
+      ) : (
+        <div className="my-5 grid grid-cols-4 gap-4">
+          {cards &&
+            cards.map((card) => (
+              <Card
+                key={card.cardId}
+                card={card}
+                cover={cover}
+                handleChoice={handleChoice}
+                wrongChoiceDelay={wrongChoiceDelay}
+                flipped={
+                  card === choiceOne || card === choiceTwo || card.matched
+                }
+              />
+            ))}
+        </div>
+      )}
+
       <div>
         <div className="flex align-middle justify-center items-center gap-2">
           <button
