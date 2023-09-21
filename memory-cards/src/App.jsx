@@ -19,21 +19,27 @@ function App() {
 
   const handleAddition = () => {
     setCardsAmount((pre) => {
-      return pre + 1;
+      if (pre === 12) {
+        return setCardsAmount(12);
+      } else {
+        return pre + 1;
+      }
     });
   };
   const handleSubtraction = () => {
     setCardsAmount((pre) => {
-      return pre - 1;
+      if (pre === 4) {
+        return setCardsAmount(4);
+      } else {
+        return pre - 1;
+      }
     });
   };
-  console.log(cardsAmount);
 
   //Get A Random Array Of 8 Numbers
   const randomCherArray = Array(cardsAmount !== 8 ? cardsAmount : 8)
     .fill()
-    .map(() => Math.floor(826 * Math.random()));
-  console.log(randomCherArray);
+    .map(() => Math.ceil(826 * Math.random()));
 
   // Get Our 8 Random chars from the API
   const getCharacters = async () => {
@@ -45,7 +51,6 @@ function App() {
       console.log(error.response);
     }
   };
-  //get gif
 
   //Shuffle cards
   const ShuffleCards = () => {
@@ -58,7 +63,6 @@ function App() {
     setChoiceTwo(null);
     setTurns(0);
     setEndGame(0);
-    console.log('cards:', shuffledCards);
   };
   //Handle choices
   const handleChoice = (card) => {
